@@ -11,6 +11,7 @@ gcc -Wall -pedantic -std=c11 -ggdb  -I../libcs50 -I../common   -c -o crawler.o c
 gcc -Wall -pedantic -std=c11 -ggdb  -I../libcs50 -I../common crawler.o ../common/common.a ../libcs50/libcs50-given.a -o crawler
 ./testing.sh
 ERROR: please input 3 arguments: seedURL, pageDirectory, maxDepth
+ERROR: invalid seedURL
 ERROR: .crawler unable to open
 ERROR: invalid pageDirectory
 ERROR: maxDepth out of range (0-10)

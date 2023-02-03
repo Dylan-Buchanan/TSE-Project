@@ -6,9 +6,10 @@
 # Dylan Buchanan, January 2023
 
 # Wrong number of arguments
+./crawler www.verycool.net ../tse-output 0 hamsandwich
 
 # Invalid URL
-./crawler www.verycool.net ../tse-output 0 hamsandwich
+./crawler www.verycool.net ../tse-output 0
 
 # Invalid Directory
 ./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/index.html amazingFolderName 0
