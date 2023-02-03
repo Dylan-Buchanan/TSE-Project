@@ -1,0 +1,17 @@
+rm -rf *.dSYM  # MacOS debugger info
+rm -f *~ *.o
+rm -f crawler
+rm -f core
+rm -rf ../tse-output/*
+make -C ../common
+make[1]: Entering directory '/thayerfs/home/f005cpk/cs50-dev/tse-Dylan-Buchanan/common'
+make[1]: 'common.a' is up to date.
+make[1]: Leaving directory '/thayerfs/home/f005cpk/cs50-dev/tse-Dylan-Buchanan/common'
+gcc -Wall -pedantic -std=c11 -ggdb  -I../libcs50 -I../common   -c -o crawler.o crawler.c
+gcc -Wall -pedantic -std=c11 -ggdb  -I../libcs50 -I../common crawler.o ../common/common.a ../libcs50/libcs50-given.a -o crawler
+./testing.sh
+ERROR: please input 3 arguments: seedURL, pageDirectory, maxDepth
+ERROR: .crawler unable to open
+ERROR: invalid pageDirectory
+ERROR: maxDepth out of range (0-10)
+ERROR: maxDepth out of range (0-10)
