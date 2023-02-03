@@ -73,6 +73,10 @@ static void parseArgs(const int argc, char* argv[], char** seedURL, char** pageD
     }
     // normalize the url
     char* norm = normalizeURL(argv[1]);
+    if (norm == NULL) {
+        fprintf(stderr, "ERROR: invalid seedURL\n");
+        exit(1);
+    }
     // allocate the memory for the url
     *seedURL = mem_malloc_assert((strlen(norm) * sizeof(char) + 1), "ERROR: out of memory for seedURL\n");
     strcpy(*seedURL, norm);
