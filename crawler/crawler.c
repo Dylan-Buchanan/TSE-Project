@@ -154,6 +154,7 @@ static void crawl(char* seedURL, char* pageDirectory, const int maxDepth) {
             fprintf(stderr, "ERROR: could not fetch webpage\n");
             exit(1);
         }
+        printf("Fetched: %s\n", webpage_getURL(page));
         // save the page to a file
         pagedir_save(page, pageDirectory, docInt);
         // next file name changed
