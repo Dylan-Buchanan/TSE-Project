@@ -1,4 +1,4 @@
-# Makefile for 'hashtable' module
+# Makefile for 'crawler' module
 #
 # Dylan Buchanan, January 2023
 
@@ -28,7 +28,7 @@ test: clean update crawler
 	./testing.sh
 
 valgrind: update crawler
-	valgrind --leak-check=full --show-leak-kinds=all ./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/index.html ../tse-output 2
+	valgrind --leak-check=full --show-leak-kinds=all ./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/index.html ../tse-output 10
 # $(VALGRIND) ./testing.sh
 
 clean:
