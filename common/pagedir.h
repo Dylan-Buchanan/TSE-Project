@@ -24,3 +24,17 @@ bool pagedir_init(const char* pageDirectory);
 *  Closes the file
 */
 void pagedir_save(const webpage_t* page, const char* pageDirectory, const int docID);
+
+/***********pagedir_validate()***********/
+/*
+* Checks to see if a pageDirectory has a .crawler file in it 
+* Returns true if it is a valid crawler directory
+*/
+bool pagedir_validate(const char* pageDirectory);
+
+/***********pagedir_load()***********/
+/*
+* Takes a crawler file and the docID and turns it into a webpage
+* Returns the webpage_t* if it worked and NULL otherwise 
+*/
+webpage_t* pagedir_load(const char* pageDirectory, const int docID);
