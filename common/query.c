@@ -88,6 +88,19 @@ int query_get_length(query_t* query) {
     return query->length;
 }
 
+/***********query_print()***********/
+// see query.h for function information
+void query_print(query_t* query) {
+    printf("Query: ");
+    for (int i = 0; i < query->length; query++) {
+        if (i == query->length - 1) {
+            printf("%s\n", query->words[i]);
+            return;
+        }
+        printf("%s ", query->words[i]);
+    }
+}
+
 /***********merge_get_holder()***********/
 // see query.h for function information
 counters_t* merge_get_holder(mergeSet_t* merge) {

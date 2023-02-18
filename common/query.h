@@ -57,6 +57,12 @@ char** query_get_words(query_t* qeury);
 */
 int query_get_length(query_t* query);
 
+/***********query_print()***********/
+/*
+* Prints each word in the query with proper spacing
+*/
+void query_print(query_t* query);
+
 /***********merge_get_holder()***********/
 /*
 * Returns the merge holder counter
