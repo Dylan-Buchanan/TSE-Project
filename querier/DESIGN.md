@@ -90,8 +90,8 @@ in the document with that ID.
 
 Integration testing. The querier, as a complete program, will be tested by taking a valid _crawler_ directory and _indexer_ file and using them to search for keywords from user input.
 
-    1. Test querier with various invalid arguments. 2. no arguments 3. one argument 4. three or more arguments 5. invalid pageDirectory
-       (non-existent path) 5. invalid pageDirectory (not a crawler directory) 6. invalid indexFile (non-existent path) 7. invalid 
-       indexFile (read-only directory) 7. invalid indexFile (existing, read-only file)
-    2. Run _querier_ on a variety of pageDirectories with smaller webpages and confirm results.
-    3. Run _valgrind_ on _querier_ to ensure no memory leaks or errors.
+> 1. Test _querier_ with various invalid arguments. 2. no arguments 3. one argument 4. three or more arguments 5. invalid pageDirectory 
+>    (non-existent path) 5. invalid pageDirectory (not a crawler directory) 6. invalid indexFile (non-existent path) 7. 
+>    invalid indexFile (read-only directory) 7. invalid indexFile (existing, read-only file)
+> 2. Run _querier_ on a variety of pageDirectories with smaller webpages and confirm results.
+> 3. Run _valgrind_ on _querier_ to ensure no memory leaks or errors.
