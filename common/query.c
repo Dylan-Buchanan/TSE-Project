@@ -121,11 +121,17 @@ int* max_get_int(max_t* max) {
     return max->docID;
 }
 
+/***********has_doc_helper()***********/
+/*
+* Sets the docID being looked at to the docID being passed in as an arg
+*/
 static void has_doc_helper(void* arg, const int docID, const int count) {
     int* doc = arg;
     *doc = docID;
 }
 
+/***********has_doc_helper()***********/
+// see query.h for function information
 int* counters_has_doc(counters_t* ct) {
     int* docID = mem_malloc_assert(sizeof(int), "ERROR: Out of memory allocating doc\n");
     *docID = 0;
