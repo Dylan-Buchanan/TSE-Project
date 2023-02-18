@@ -88,11 +88,3 @@ int* max_get_int(max_t* max);
 * Sets an argument to the docID if it exists
 */
 int* counters_has_doc(counters_t* ct);
-
-/***********has_doc_helper()***********/
-/*
-* Returns true if a counter object passed in has
-* a docID. Returns false otherwise.
-* Iterates through a counter object to check.
-*/
-int* counters_has_doc(counters_t* ct)

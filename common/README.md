@@ -67,3 +67,42 @@ char* normalizeWord(const char* word);
 ```
 
 `normalizeWord` takes a _char*_ as an argument and normalizes it as stated above.
+
+### query
+
+Contains many useful structures and functions for querier.c.
+
+```c
+query_t* new_query(char** words, int length);
+mergeSet_t* new_merge(counters_t* empty, counters_t* ctB);
+max_t* new_max(int* docID, counters_t* ct);
+void query_delete(query_t* query);
+char** query_get_words(query_t* qeury);
+int query_get_length(query_t* query);
+counters_t* merge_get_holder(mergeSet_t* merge);
+counters_t* merge_get_second(mergeSet_t* merge);
+counters_t* max_get_counter(max_t* max);
+int* max_get_int(max_t* max);
+int* counters_has_doc(counters_t* ct);
+int* counters_has_doc(counters_t* ct)
+```
+
+`new_query` Creates a new _query_ object.
+
+`new_merge` Creates a new _merge_ object to merge counters.
+
+`new_max` Creates a new _max_ object to find the maximum count in a counter.
+
+`query_delete` Deletes a _query_ object.
+
+`query_get_words` Gets the query of a _query_ object.
+
+`query_get_length` Gets the length of a query in a _query_ object.
+
+`merge_get_holder` Gets the new counter when counters are being merged.
+
+`merge_get_second` Gets the second counter that is being merged.
+
+`max_get_counter` Gets the counter being looked at for the maximum count.
+
+`counters_has_doc` Returns whether or not a _counters_ object contains a document or not.
