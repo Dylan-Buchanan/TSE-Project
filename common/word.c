@@ -35,6 +35,8 @@ char* normalizeWord(const char* word) {
     return lower;
 }
 
+/***********normalizeQuery()***********/
+// see word.h for comments about exported functions
 char* normalizeQuery(const char* word) {
     // makes a copy of the word
     char* lower = mem_malloc_assert(strlen(word) * sizeof(char) + 1, "ERROR: Out of memory allocating lower case word");

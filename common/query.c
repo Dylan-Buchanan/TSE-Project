@@ -8,6 +8,8 @@
 #include "../libcs50/mem.h"
 #include "../libcs50/counters.h"
 
+static void has_doc_helper(void* arg, const int docID, const int count);
+
 /***********Structures***********/
 // A strucure to hold the query in querier.c
 typedef struct query {
@@ -76,8 +78,8 @@ void query_delete(query_t* query) {
 
 /***********query_get_words()***********/
 // see query.h for function information
-char** query_get_words(query_t* qeury) {
-    return qeury->words;
+char** query_get_words(query_t* query) {
+    return query->words;
 }
 
 /***********query_get_length()***********/
@@ -89,11 +91,44 @@ int query_get_length(query_t* query) {
 /***********merge_get_holder()***********/
 // see query.h for function information
 counters_t* merge_get_holder(mergeSet_t* merge) {
+    if (merge->merge == NULL) {
+        return NULL;
+    }
     return merge->merge;
 }
 
 /***********merge_get_second()***********/
 // see query.h for function information
 counters_t* merge_get_second(mergeSet_t* merge) {
+    if (merge->ct2 == NULL) {
+        return NULL;
+    }
     return merge->ct2;
 }
+
+/***********max_get_counter()***********/
+// see query.h for function information
+counters_t* max_get_counter(max_t* max) {
+    if (max->ct == NULL) {
+        return NULL;
+    }
+    return max->ct;
+}
+
+/***********max_get_int()***********/
+// see query.h for function information
+int* max_get_int(max_t* max) {
+    return max->docID;
+}
+
+static void has_doc_helper(void* arg, const int docID, const int count) {
+    int* doc = arg;
+    *doc = docID;
+}
+
+int* counters_has_doc(counters_t* ct) {
+    int* docID = mem_malloc_assert(sizeof(int), "ERROR: Out of memory allocating doc\n");
+    *docID = 0;
+    counters_iterate(ct, docID, has_doc_helper);
+    return docID;
+} 

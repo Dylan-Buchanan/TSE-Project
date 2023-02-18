@@ -80,3 +80,11 @@ counters_t* max_get_counter(max_t* max);
 * Returns the int* for the docID in the max object
 */
 int* max_get_int(max_t* max);
+
+/***********counters_has_doc()***********/
+/*
+* Returns whether or not a counter has a docID in it
+* Iterates through the counter
+* Sets an argument to the docID if it exists
+*/
+int* counters_has_doc(counters_t* ct);
