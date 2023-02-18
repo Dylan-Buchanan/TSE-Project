@@ -3,7 +3,7 @@
 # Dylan Buchanan, January 2023
 
 CSL = ../libcs50/
-OBJS = pagedir.o $(CSL)mem.o $(CSL)file.o $(CSL)webpage.o index.o word.o
+OBJS = pagedir.o $(CSL)mem.o $(CSL)file.o $(CSL)webpage.o index.o word.o query.o
 LIB = common.a
 
 # uncomment the following to turn on verbose memory logging
@@ -24,6 +24,7 @@ $(CSL)file.o: $(CSL)file.h
 $(CSL)webpage.o: $(CSL)webpage.h
 index.o: index.h $(CSL)hashtable.h $(CSL)mem.h $(CSL)file.h $(CSL)counters.h
 word.o: word.h
+query.o: query.h
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info

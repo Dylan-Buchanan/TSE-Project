@@ -173,6 +173,7 @@ void index_set(index_t* index, char* key, counters_t* ct) {
     }
     // insert the word and counters object into the hashtable
     hashtable_insert(index->hash, key, ct);
+    
 }
 
 /***********index_load()***********/
