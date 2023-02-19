@@ -1,6 +1,17 @@
 # CS50 Lab 6
 ## CS50 Winter 2023
 
+```
+****************
+* EXTENSION USED
+****************
+```
+```
+****************
+* EXTENSION USED
+****************
+```
+
 ### querier
 
 `querier.c` used to search for certain words from a _query_ using an _index file_ and a _crawler_ directory.
