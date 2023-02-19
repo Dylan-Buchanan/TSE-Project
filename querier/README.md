@@ -1,4 +1,4 @@
-# CS50 Lab 5
+# CS50 Lab 6
 ## CS50 Winter 2023
 
 ### querier
