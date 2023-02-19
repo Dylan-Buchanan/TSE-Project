@@ -27,7 +27,7 @@ test: clean update querier
 	./testing.sh
 
 valgrind: $(C)
-	$(VALGRIND) ./querier ../tse-output/wikipedia-1 ../tse-output/wikipedia-1-index
+	$(VALGRIND) ./querier ../tse-output/wikipedia-1 ../tse-output/wikipedia-1-index < testwords.txt
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info

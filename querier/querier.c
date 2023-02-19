@@ -90,6 +90,7 @@ int main(const int argc, char* argv[]) {
 * Return NULL when criteria aren't met
 */
 static query_t* parseInput(char* input) {
+    printf("\n");
     // loop through the input
     for (int a = 0; a < strlen(input); a++) {
         // if it is a space or letter ignore it
@@ -136,6 +137,10 @@ static query_t* parseInput(char* input) {
             if (words[wordNum] == NULL) {
                 printf("ERROR: %s is not a big enough word.\n", newWord);
                 mem_free(newWord);
+                for (int a = 0; a < wordNum; a++) {
+                    mem_free(words[a]);
+                }
+                mem_free(words);
                 return NULL;
             }
             // increment how many words were successful
@@ -208,19 +213,21 @@ static bool parseAndOr(query_t* query) {
 */
 static void askInput(index_t* index, const char* pageDirectory) {
     // get input from user
-    printf("Query? ");
+    printf("\nQuery? ");
     char* input = file_readLine(stdin);
     // if they stopped input then finish asking
     if (input == NULL) {
+        printf("\n");
         return;
     }
-    // parse it and tell the user their query and 
+    // parse it
     query_t* query = parseInput(input);
-    query_print(query);
     // if the query has valid characters
     if (query != NULL) {
         // check if the query as valid syntax
         if (parseAndOr(query)) {
+            // print the query as it is valid
+            query_print(query);
             // look up the words
             counters_t* result = findQuery(index, pageDirectory, query);
             // check if any docIDs were found
