@@ -1,0 +1,144 @@
+rm -rf *.dSYM  # MacOS debugger info
+rm -f *~ *.o
+rm -f querier
+rm -f core
+make -C ../common
+make[1]: Entering directory '/thayerfs/home/f005cpk/cs50-dev/tse-Dylan-Buchanan/common'
+make[1]: 'common.a' is up to date.
+make[1]: Leaving directory '/thayerfs/home/f005cpk/cs50-dev/tse-Dylan-Buchanan/common'
+gcc -Wall -pedantic -std=c11 -ggdb  -I../libcs50 -I../common   -c -o querier.o querier.c
+gcc -Wall -pedantic -std=c11 -ggdb  -I../libcs50 -I../common querier.o ../common/common.a ../libcs50/libcs50-given.a -o querier
+bash -v ./testing.sh
+module () {  _module_raw "$@" 2>&1
+}
+ml () {  module ml "$@"
+}
+_module_raw () {  eval `/usr/bin/tclsh8.6 /usr/lib/x86_64-linux-gnu/modulecmd.tcl bash "$@"`;
+ _mlstatus=$?;
+ return $_mlstatus
+}
+#!/bin/bash
+#
+# testing - tests various edge cases and uses input from
+# a text file to test scenarios from input
+#
+# Dylan Buchanan, February 2023
+
+# No arguments
+./querier
+Please input 2 arguments in the format: ./querier pageDirectory indexFilename
+
+# One argument
+./querier ../tse-output/wikipedia-1
+Please input 2 arguments in the format: ./querier pageDirectory indexFilename
+
+# Input from test file
+# words - 4:3 3:2 2:1 6:1 7:1
+# science - 7:150 4:5 2:4 3:4 1:1 6:1
+# birds - No documents
+# words and science - 4:3 3:2 2:1 6:1 7:1
+# words or science - 7:171 4:8 3:6 2:5 6:2 1:1
+# birds and words - No documents
+# birds or words - 4:3 3:2 2:1 6:1 7:1
+./querier ../tse-output/wikipedia-1 ../tse-output/wikipedia-1-index < testwords.txt
+ERROR: Bad character '!' in query.
+ERROR: Bad character '[' in query.
+
+Query? 
+ERROR: Cannot begin query with 'or'.
+
+Query? 
+
+Query? 
+ERROR: a is not a big enough word.
+
+Query? 
+
+Query? 
+ERROR: Cannot put 'or' next to 'and' / 'or'.
+
+Query? 
+ERROR: Cannot put 'and' next to 'and' / 'or'.
+
+Query? 
+ERROR: Cannot end query with 'or'.
+
+Query? 
+Query: words
+Score:  3 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  2 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  1 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  1 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+Score:  1 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+
+Query? 
+Query: words
+Score:  3 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  2 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  1 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  1 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+Score:  1 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+
+Query? 
+Query: science
+Score:  170 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+Score:  5 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  4 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  4 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  1 || Doc:  1 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/index.html
+Score:  1 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+
+Query? 
+Query: birds
+No documents match.
+
+Query? 
+Query: words and science
+Score:  3 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  2 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  1 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  1 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+Score:  1 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+
+Query? 
+Query: words and science
+Score:  3 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  2 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  1 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  1 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+Score:  1 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+
+Query? 
+Query: words science
+Score:  3 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  2 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  1 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  1 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+Score:  1 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+
+Query? 
+Query: words or science
+Score:  171 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+Score:  8 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  6 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  5 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  2 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+Score:  1 || Doc:  1 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/index.html
+
+Query? 
+Query: birds and words
+No documents match.
+
+Query? 
+Query: words and birds
+No documents match.
+
+Query? 
+Query: birds or words
+Score:  3 || Doc:  4 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Dartmouth_College.html
+Score:  2 || Doc:  3 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Hash_table.html
+Score:  1 || Doc:  2 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Linked_list.html
+Score:  1 || Doc:  6 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./C_(programming_language).html
+Score:  1 || Doc:  7 || http://cs50tse.cs.dartmouth.edu/tse/wikipedia/./Computer_science.html
+
+Query? 

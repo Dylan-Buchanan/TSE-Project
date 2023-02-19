@@ -19,4 +19,6 @@
 # words or science - 7:171 4:8 3:6 2:5 6:2 1:1
 # birds and words - No documents
 # birds or words - 4:3 3:2 2:1 6:1 7:1
+# NOTE: there is a weird visual bug with output when it is sent to testing.out
+#       I was unable to find out why because it looks fine in console
 ./querier ../tse-output/wikipedia-1 ../tse-output/wikipedia-1-index < testwords.txt
