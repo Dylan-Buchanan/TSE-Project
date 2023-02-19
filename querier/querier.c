@@ -357,6 +357,10 @@ static counters_t* mergeOr(counters_t* ct1, counters_t* ct2) {
 /*
 * Creates a counters object from the query asked
 * 
+* Has an outer loop that calls an inner loop at
+* the start of a query and after every 'or'
+* in a query. This allows the inner loop to
+* only have to concern itself with 'and' keywords
 */
 static counters_t* findQuery(index_t* index, const char* pageDirectory, query_t* query) {
     // grab query and create an unitialized set holder
