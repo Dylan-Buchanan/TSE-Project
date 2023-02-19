@@ -98,7 +98,7 @@ static query_t* parseInput(char* input) {
             continue;
         }
         // otherwise the input is invalid
-        fprintf(stderr, "ERROR: Bad character '%c' in query.\n", input[a]);
+        fprintf(stdout, "ERROR: Bad character '%c' in query.\n", input[a]);
         return NULL;
     }
     // initialize the list for the maximum possible number of words based on the input length
@@ -135,7 +135,7 @@ static query_t* parseInput(char* input) {
             words[wordNum] = normalizeQuery(newWord);
             // check that it worked (only fails if too big)
             if (words[wordNum] == NULL) {
-                printf("ERROR: %s is not a big enough word.\n", newWord);
+                fprintf(stdout, "ERROR: %s is not a big enough word.\n", newWord);
                 mem_free(newWord);
                 for (int a = 0; a < wordNum; a++) {
                     mem_free(words[a]);
@@ -168,11 +168,11 @@ static bool parseAndOr(query_t* query) {
     int length = query_get_length(query);
     // check that and/or isn't used at the front or back
     if (strcmp(words[0], "and") == 0 || strcmp(words[0], "or") == 0) {
-        printf("ERROR: Cannot begin query with '%s'.\n", words[0]);
+        fprintf(stdout, "ERROR: Cannot begin query with '%s'.\n", words[0]);
         return false;
     }
     if (strcmp(words[length - 1], "and") == 0 || strcmp(words[length -1], "or") == 0) {
-        printf("ERROR: Cannot end query with '%s'.\n", words[length - 1]);
+        fprintf(stdout, "ERROR: Cannot end query with '%s'.\n", words[length - 1]);
         return false;
     }
     // keep track if the previous word was and/or
@@ -182,7 +182,7 @@ static bool parseAndOr(query_t* query) {
         if (strcmp(words[i], "and") == 0 || strcmp(words[i], "or") == 0) {
             // and the previous one was too, return false
             if (prev) {
-                printf("ERROR: Cannot put '%s' next to 'and' / 'or'.\n", words[i]);
+                fprintf(stdout, "ERROR: Cannot put '%s' next to 'and' / 'or'.\n", words[i]);
                 return false;
             }
             // otherwise update that there was an and/or
@@ -191,7 +191,7 @@ static bool parseAndOr(query_t* query) {
         // ensure that there are no 2 letter words left
         else {
             if (strlen(words[i]) < 3) {
-                printf("ERROR: %s is not a big enough word.\n", words[i]);
+                fprintf(stdout, "ERROR: %s is not a big enough word.\n", words[i]);
                 return false;
             }
             // otherwise ensure reset
@@ -213,11 +213,11 @@ static bool parseAndOr(query_t* query) {
 */
 static void askInput(index_t* index, const char* pageDirectory) {
     // get input from user
-    printf("\nQuery? ");
+    fprintf(stdout, "\nQuery? ");
     char* input = file_readLine(stdin);
     // if they stopped input then finish asking
     if (input == NULL) {
-        printf("\n");
+        fprintf(stdout, "\n");
         return;
     }
     // parse it
@@ -233,7 +233,7 @@ static void askInput(index_t* index, const char* pageDirectory) {
             // check if any docIDs were found
             int* hasDoc = counters_has_doc(result);
             if (result == NULL || *hasDoc == 0) {
-                printf("No documents match.\n");
+                fprintf(stdout, "No documents match.\n");
             }
             else {
                 resultPrint(result, pageDirectory);
@@ -468,7 +468,7 @@ static void resultPrint(counters_t* ct, const char* pageDirectory) {
         char* html = file_readLine(file);
         fclose(file);
         // print out the max docID information
-        printf("Score:  %d || Doc:  %d || %s\n", counters_get(ct, *docID), *docID, html);
+        fprintf(stdout, "Score:  %d || Doc:  %d || %s\n", counters_get(ct, *docID), *docID, html);
         // set that docID to 0 so it won't come up again
         counters_set(ct, *docID, 0);
         // clean up

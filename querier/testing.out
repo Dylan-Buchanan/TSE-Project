@@ -41,18 +41,18 @@ Please input 2 arguments in the format: ./querier pageDirectory indexFilename
 # birds and words - No documents
 # birds or words - 4:3 3:2 2:1 6:1 7:1
 ./querier ../tse-output/wikipedia-1 ../tse-output/wikipedia-1-index < testwords.txt
-ERROR: Bad character '!' in query.
-ERROR: Bad character '[' in query.
 
 Query? 
 ERROR: Cannot begin query with 'or'.
 
 Query? 
+ERROR: Bad character '!' in query.
 
 Query? 
 ERROR: a is not a big enough word.
 
 Query? 
+ERROR: Bad character '[' in query.
 
 Query? 
 ERROR: Cannot put 'or' next to 'and' / 'or'.

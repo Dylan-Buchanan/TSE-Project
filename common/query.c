@@ -91,13 +91,13 @@ int query_get_length(query_t* query) {
 /***********query_print()***********/
 // see query.h for function information
 void query_print(query_t* query) {
-    printf("Query: ");
+    fprintf(stdout, "Query: ");
     for (int i = 0; i < query->length; i++) {
         if (i == query->length - 1) {
-            printf("%s\n", query->words[i]);
+            fprintf(stdout, "%s\n", query->words[i]);
             return;
         }
-        printf("%s ", query->words[i]);
+        fprintf(stdout, "%s ", query->words[i]);
     }
 }
 
